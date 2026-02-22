@@ -1,0 +1,571 @@
+options:
+  parameters:
+    author: chrisos
+    catch_exceptions: 'True'
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: rx
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: rx
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 4.0]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: channel
+  id: variable
+  parameters:
+    comment: ''
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [96, 116.0]
+    rotation: 0
+    state: enabled
+- name: rx_gain
+  id: variable
+  parameters:
+    comment: ''
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 116.0]
+    rotation: 0
+    state: enabled
+- name: squelch
+  id: variable_function_probe
+  parameters:
+    block_id: probe_signal
+    comment: ''
+    function_args: ''
+    function_name: level
+    poll_rate: '1'
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [192, 4.0]
+    rotation: 0
+    state: enabled
+- name: tx_enable
+  id: variable
+  parameters:
+    comment: ''
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [272, 116.0]
+    rotation: 0
+    state: enabled
+- name: tx_trans
+  id: variable
+  parameters:
+    comment: ''
+    value: 1 if not squelch and tx_enable else 0
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 116.0]
+    rotation: 0
+    state: enabled
+- name: analog_nbfm_rx_0
+  id: analog_nbfm_rx
+  parameters:
+    affinity: ''
+    alias: ''
+    audio_rate: '48000'
+    comment: ''
+    max_dev: 5e3
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    quad_rate: '192000'
+    tau: 75e-6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [656, 564.0]
+    rotation: 0
+    state: enabled
+- name: analog_nbfm_tx_0
+  id: analog_nbfm_tx
+  parameters:
+    affinity: ''
+    alias: ''
+    audio_rate: '48000'
+    comment: ''
+    fh: '-1.0'
+    max_dev: 2.5e3
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    quad_rate: '192000'
+    tau: 75e-6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [376, 200.0]
+    rotation: 0
+    state: enabled
+- name: analog_simple_squelch_cc_0
+  id: analog_simple_squelch_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha: '1'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    threshold: '-50'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [456, 692.0]
+    rotation: 0
+    state: enabled
+- name: audio_sink_0
+  id: audio_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    device_name: ''
+    num_inputs: '1'
+    ok_to_block: 'True'
+    samp_rate: '48000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1064, 712.0]
+    rotation: 0
+    state: enabled
+- name: audio_source_0
+  id: audio_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    device_name: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_outputs: '1'
+    ok_to_block: 'True'
+    samp_rate: '48000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 240.0]
+    rotation: 0
+    state: enabled
+- name: band_pass_filter_0
+  id: band_pass_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    beta: '6.76'
+    comment: ''
+    decim: '1'
+    gain: '1'
+    high_cutoff_freq: 2.5e3
+    interp: '1'
+    low_cutoff_freq: '300'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: 48e3
+    type: interp_fir_filter_fff
+    width: '200'
+    win: window.WIN_HAMMING
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [856, 656.0]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_const_vxx_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: tx_enable
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [208, 240.0]
+    rotation: 0
+    state: enabled
+- name: blocks_rms_xx_0
+  id: blocks_rms_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha: '0.0001'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: complex
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [560, 872.0]
+    rotation: 0
+    state: enabled
+- name: blocks_threshold_ff_0
+  id: blocks_threshold_ff
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    high: '0.02'
+    init: '0'
+    low: '0.005'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [704, 852.0]
+    rotation: 0
+    state: enabled
+- name: epy_block_0
+  id: epy_block
+  parameters:
+    _source_code: "import numpy as np\nfrom gnuradio import gr\nimport RPi.GPIO as\
+      \ GPIO\nimport threading\nimport time\n\nclass blk(gr.sync_block):\n    \"\"\
+      \"\n    Pi GPIO Controller for SDR:\n    - TX button: momentary transmit\n \
+      \   - Channel button: single click forward, double click backward\n    - Gain\
+      \ button: single click up, double click down\n    - LED: on when receiving or\
+      \ transmitting\n    \"\"\"\n\n    def __init__(self, tx_pin=17, chan_pin=27,\
+      \ gain_pin=22, led_pin=23):\n        # sdr_source and sdr_sink are SDR blocks\
+      \ you want to control\n        gr.sync_block.__init__(self,\n            name=\"\
+      Pi 5 GPIO Controller\",\n            in_sig=[np.float32],  # input from SDR\n\
+      \            out_sig=None  # pass through for audio if needed\n        )\n\n\
+      \        self.parent = None\n\n        # GPIO pins\n        self.TX_PIN = tx_pin\n\
+      \        self.CHAN_PIN = chan_pin\n        self.GAIN_PIN = gain_pin\n      \
+      \  self.LED_PIN = led_pin\n\n        # Variables\n        self.running = False\n\
+      \        self.tx_trans = 0\n        self.chan_list = [0, 12500, 25000]\n   \
+      \     self.gain_list = [4, 8, 16, 32, 64]\n        self.chan_idx = 0\n     \
+      \   self.gain_idx = 0\n        self.channel = self.chan_list[self.chan_idx]\n\
+      \        self.rx_gain = self.gain_list[self.gain_idx]\n\n        # Debounce\
+      \ / button thread lock\n        self.lock = threading.Lock()\n\n    # ------------------------\n\
+      \    # Button utilities\n    # ------------------------\n    def detect_clicks(self,\
+      \ pin, timeout=0.4):\n        \"\"\"Detects single or double clicks on a button.\"\
+      \"\"\n        count = 0\n        start_time = time.time()\n        while time.time()\
+      \ - start_time < timeout:\n            if GPIO.input(pin) == GPIO.HIGH:\n  \
+      \              count += 1\n                while GPIO.input(pin) == GPIO.HIGH:\n\
+      \                    time.sleep(0.01)  # wait for release\n                time.sleep(0.01)\
+      \  # debounce\n        return count\n\n    def button_thread(self):\n      \
+      \  while self.running:\n            # ----------------\n            # TX Button\n\
+      \            # ----------------\n            tx_state = 1 if GPIO.input(self.TX_PIN)\
+      \ == GPIO.HIGH else 0\n            with self.lock:\n                self.parent.set_tx_enable(tx_state)\n\
+      \n            # ----------------\n            # Channel Button\n           \
+      \ # ----------------\n            if GPIO.input(self.CHAN_PIN) == GPIO.HIGH:\n\
+      \                clicks = self.detect_clicks(self.CHAN_PIN)\n              \
+      \  step = 1 if clicks == 1 else -1 if clicks >= 2 else 0\n                with\
+      \ self.lock:\n                    self.chan_idx = (self.chan_idx + step) % len(self.chan_list)\n\
+      \                    self.channel = self.chan_list[self.chan_idx]\n        \
+      \            # Update SDR source frequency\n                    self.parent.set_channel(self.channel)\n\
+      \                print(f\"[Channel] New frequency: {self.channel}\")\n\n   \
+      \         # ----------------\n            # Gain Button\n            # ----------------\n\
+      \            if GPIO.input(self.GAIN_PIN) == GPIO.HIGH:\n                clicks\
+      \ = self.detect_clicks(self.GAIN_PIN)\n                step = 1 if clicks ==\
+      \ 1 else -1 if clicks >= 2 else 0\n                with self.lock:\n       \
+      \             self.gain_idx = (self.gain_idx + step) % len(self.gain_list)\n\
+      \                    self.rx_gain = self.gain_list[self.gain_idx]\n        \
+      \            # Update SDR source gain\n                    self.parent.set_rx_gain(self.rx_gain)\n\
+      \                print(f\"[Gain] New RX gain: {self.rx_gain}\")\n\n        \
+      \    time.sleep(0.05)\n\n    # ------------------------\n    # GNU Radio work\
+      \ function\n    # ------------------------\n    def work(self, input_items,\
+      \ output_items):\n        # Determine receiving based on input RMS\n       \
+      \ rms = np.sqrt(np.mean(np.square(input_items[0])))\n        is_receiving =\
+      \ rms > 0.001  # adjust threshold if needed\n\n        # TX state from thread\n\
+      \        with self.lock:\n            is_transmitting = self.tx_trans\n\n  \
+      \      light_on = is_transmitting and not is_receiving or not is_transmitting\
+      \ and is_receiving\n\n        # LED control\n        GPIO.output(self.LED_PIN,\
+      \ GPIO.HIGH if light_on else GPIO.LOW)\n\n        return len(input_items[0])\n\
+      \n    # ------------------------\n    # Start/Stop\n    # ------------------------\n\
+      \    def start(self):\n        GPIO.setmode(GPIO.BCM)\n        GPIO.setup([self.TX_PIN,\
+      \ self.CHAN_PIN, self.GAIN_PIN], GPIO.IN, pull_up_down=GPIO.PUD_DOWN)\n    \
+      \    GPIO.setup(self.LED_PIN, GPIO.OUT)\n\n        self.running = True\n   \
+      \     self.thread = threading.Thread(target=self.button_thread, daemon=True)\n\
+      \        self.thread.start()\n        return super().start()\n\n    def stop(self):\n\
+      \        self.running = False\n        if hasattr(self, 'thread') and self.thread.is_alive():\n\
+      \            self.thread.join()\n        GPIO.cleanup()\n        return super().stop()\n"
+    affinity: ''
+    alias: ''
+    chan_pin: '27'
+    comment: ''
+    gain_pin: '22'
+    led_pin: '23'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    tx_pin: '17'
+  states:
+    _io_cache: '(''Pi 5 GPIO Controller'', ''blk'', [(''tx_pin'', ''17''), (''chan_pin'',
+      ''27''), (''gain_pin'', ''22''), (''led_pin'', ''23'')], [(''0'', ''float'',
+      1)], [], ''\nPi GPIO Controller for SDR:\n- TX button: momentary transmit\n-
+      Channel button: single click forward, double click backward\n- Gain button:
+      single click up, double click down\n- LED: on when receiving or transmitting\n'',
+      [])'
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [888, 828.0]
+    rotation: 0
+    state: enabled
+- name: iio_pluto_sink_0
+  id: iio_pluto_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    attenuation1: 0 if tx_trans else -80
+    bandwidth: '200000'
+    buffer_size: '4096'
+    comment: ''
+    cyclic: 'False'
+    filter: ''
+    filter_source: '''Auto'''
+    fpass: '0'
+    frequency: '446000000'
+    fstop: '0'
+    len_tag_key: ''
+    samplerate: '768000'
+    type: fc32
+    uri: '"192.168.3.1"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [856, 68.0]
+    rotation: 0
+    state: enabled
+- name: iio_pluto_source_0
+  id: iio_pluto_source
+  parameters:
+    affinity: ''
+    alias: ''
+    bandwidth: '200000'
+    bbdc: 'True'
+    buffer_size: '4096'
+    comment: ''
+    filter: ''
+    filter_source: '''Auto'''
+    fpass: '0'
+    frequency: 446000000 + channel
+    fstop: '0'
+    gain1: '''manual'''
+    len_tag_key: packet_len
+    manual_gain1: rx_gain
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    quadrature: 'True'
+    rfdc: 'True'
+    samplerate: '768000'
+    type: fc32
+    uri: '"192.168.3.1"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 608.0]
+    rotation: 0
+    state: enabled
+- name: note_0
+  id: note
+  parameters:
+    alias: ''
+    comment: ''
+    note: TX PATH
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [520, 96.0]
+    rotation: 0
+    state: enabled
+- name: note_0_0
+  id: note
+  parameters:
+    alias: ''
+    comment: ''
+    note: RX PATH
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [560, 408.0]
+    rotation: 0
+    state: enabled
+- name: probe_signal
+  id: blocks_probe_signal_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [896, 944.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_sink_x_0
+  id: qtgui_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    bw: 48e3
+    comment: ''
+    fc: '0'
+    fftsize: '1024'
+    gui_hint: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"rx_input"'
+    plotconst: 'True'
+    plotfreq: 'True'
+    plottime: 'True'
+    plotwaterfall: 'True'
+    rate: '2'
+    showports: 'False'
+    showrf: 'False'
+    type: float
+    wintype: window.WIN_BLACKMAN_hARRIS
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [856, 424.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_sink_x_0_0
+  id: qtgui_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    bw: 768e3
+    comment: ''
+    fc: '0'
+    fftsize: '1024'
+    gui_hint: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"tx_output"'
+    plotconst: 'True'
+    plotfreq: 'True'
+    plottime: 'True'
+    plotwaterfall: 'True'
+    rate: '2'
+    showports: 'False'
+    showrf: 'True'
+    type: complex
+    wintype: window.WIN_BLACKMAN_hARRIS
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [856, 280.0]
+    rotation: 0
+    state: enabled
+- name: rational_resampler_xxx_0
+  id: rational_resampler_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: '1'
+    fbw: '0'
+    interp: '4'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    taps: '[]'
+    type: ccc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [656, 212.0]
+    rotation: 0
+    state: enabled
+- name: rational_resampler_xxx_1
+  id: rational_resampler_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: '4'
+    fbw: '0'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    taps: '[]'
+    type: ccc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [256, 676.0]
+    rotation: 0
+    state: enabled
+
+connections:
+- [analog_nbfm_rx_0, '0', band_pass_filter_0, '0']
+- [analog_nbfm_rx_0, '0', qtgui_sink_x_0, '0']
+- [analog_nbfm_tx_0, '0', rational_resampler_xxx_0, '0']
+- [analog_simple_squelch_cc_0, '0', analog_nbfm_rx_0, '0']
+- [analog_simple_squelch_cc_0, '0', blocks_rms_xx_0, '0']
+- [audio_source_0, '0', blocks_multiply_const_vxx_0, '0']
+- [band_pass_filter_0, '0', audio_sink_0, '0']
+- [blocks_multiply_const_vxx_0, '0', analog_nbfm_tx_0, '0']
+- [blocks_rms_xx_0, '0', blocks_threshold_ff_0, '0']
+- [blocks_threshold_ff_0, '0', epy_block_0, '0']
+- [blocks_threshold_ff_0, '0', probe_signal, '0']
+- [iio_pluto_source_0, '0', rational_resampler_xxx_1, '0']
+- [rational_resampler_xxx_0, '0', iio_pluto_sink_0, '0']
+- [rational_resampler_xxx_0, '0', qtgui_sink_x_0_0, '0']
+- [rational_resampler_xxx_1, '0', analog_simple_squelch_cc_0, '0']
+
+metadata:
+  file_format: 1
+  grc_version: 3.10.12.0
